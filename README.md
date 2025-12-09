@@ -2,7 +2,7 @@
 
 ## 📖 Descripción del Problema
 
-El **Problema de los Filósofos Comensales** (Dining Philosophers Problem) es un problema clásico de ciencias de la computación propuesto por Edsger Dijkstra en 1965. Este problema ilustra los desafíos de la sincronización de procesos en sistemas concurrentes y los problemas de asignación de recursos compartidos.
+El **Problema de los Filósofos Comensales** (Dining Philosophers Problem) es un problema clásico de ciencias de la computación formulado por Edsger Dijkstra en 1971. Este problema ilustra los desafíos de la sincronización de procesos en sistemas concurrentes y los problemas de asignación de recursos compartidos.
 
 ## 🎭 El Escenario
 
@@ -124,7 +124,6 @@ Este problema enseña:
 ## 📚 Referencias
 
 - Dijkstra, E. W. (1971). "Hierarchical ordering of sequential processes". Acta Informatica, 1(2), 115-138.
-- El problema fue popularizado en 1965 como ejemplo de concurrencia
 - Problema clásico de sistemas operativos y programación concurrente
 - Usado ampliamente en cursos de sistemas operativos y programación paralela
 
