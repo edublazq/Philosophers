@@ -53,14 +53,18 @@ Imagina cinco filósofos sentados alrededor de una mesa circular. Cada filósofo
 ### 1. **Deadlock (Interbloqueo)**
 Si todos los filósofos toman simultáneamente el tenedor de su izquierda, ninguno podrá tomar el tenedor de su derecha. Todos quedarían esperando eternamente.
 
-**Escenario de deadlock**: Todos tienen su tenedor izquierdo y esperan el derecho
+**Escenario de deadlock**: Cada filósofo tiene su tenedor izquierdo y espera el derecho
 ```
-  F1 (tiene izq) --espera--> 🍴 <--tiene-- F2 (espera der)
-                              ↑              ↓
-                            tiene          espera
-                              ↑              ↓
-  F5 (espera der) --tiene--> 🍴 ... en círculo ...
+     F1 (tiene izq, espera der)
+      ↓tiene                ↑espera
+     🍴                      🍴
+      ↑espera              ↓tiene
+     F5                      F2
+      ↓tiene                ↑espera
+     🍴         ...         🍴
+      (F4, F3 completan el círculo)
 ```
+Todos los 5 filósofos forman una **dependencia circular** - nadie puede continuar.
 
 ### 2. **Starvation (Inanición)**
 Algunos filósofos podrían nunca conseguir comer si otros monopolizan los recursos.
@@ -119,7 +123,8 @@ Este problema enseña:
 
 ## 📚 Referencias
 
-- Dijkstra, E. W. (1965). "Cooperating sequential processes"
+- Dijkstra, E. W. (1971). "Hierarchical ordering of sequential processes". Acta Informatica, 1(2), 115-138.
+- El problema fue popularizado en 1965 como ejemplo de concurrencia
 - Problema clásico de sistemas operativos y programación concurrente
 - Usado ampliamente en cursos de sistemas operativos y programación paralela
 
