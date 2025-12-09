@@ -14,7 +14,7 @@ Imagina cinco filósofos sentados alrededor de una mesa circular. Cada filósofo
 
 1. **La Mesa**: Hay una mesa redonda con cinco sillas, una para cada filósofo.
 
-2. **Los Tenedores**: En el centro de la mesa hay un plato de espaguetis. Entre cada par de filósofos hay exactamente **un tenedor** (total: 5 tenedores).
+2. **Los Tenedores**: En la mesa hay un plato de espaguetis para cada filósofo. Entre cada par de filósofos adyacentes hay exactamente **un tenedor** (total: 5 tenedores).
 
 3. **La Condición para Comer**: Un filósofo **necesita DOS tenedores** para comer:
    - El tenedor de su izquierda
@@ -34,18 +34,18 @@ Imagina cinco filósofos sentados alrededor de una mesa circular. Cada filósofo
 ## 🎨 Representación Visual
 
 ```
-            🧔 Filósofo 1
-               |   |
-            🍴  🍝  🍴
-          /             \
-     🧔 F5              F2 🧔
-      |                    |
-    🍴 🍝              🍝 🍴
-      |                    |
-     🧔 F4              F3 🧔
-          \             /
-            🍴  🍝  🍴
-               |   |
+                 🧔 Filósofo 1
+                  🍴      🍴
+                /            \
+          🧔 F5                F2 🧔
+           🍴                    🍴
+             \                  /
+              \                /
+               \      🍝      /
+                \          /
+                 \        /
+                  🍴    🍴
+                🧔 F4--F3 🧔
 ```
 
 ## ⚠️ Los Problemas a Resolver
@@ -54,11 +54,12 @@ Imagina cinco filósofos sentados alrededor de una mesa circular. Cada filósofo
 Si todos los filósofos toman simultáneamente el tenedor de su izquierda, ninguno podrá tomar el tenedor de su derecha. Todos quedarían esperando eternamente.
 
 ```
-🧔 (tiene izq, espera der) → 🍴 ← 🧔 (tiene izq, espera der)
-↑                                                          ↓
-🍴                                                        🍴
-↑                                                          ↓
-🧔 (tiene izq, espera der) ← 🍴 ← 🧔 (tiene izq, espera der)
+        🧔 (tiene izq, espera der)
+         ↓                      ↑
+        🍴                      🍴
+         ↓                      ↑
+🧔 ← 🍴 ← 🧔          🧔 → 🍴 → 🧔
+     (espera izq)  (tiene der, espera izq)
 ```
 
 ### 2. **Starvation (Inanición)**
