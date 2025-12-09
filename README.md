@@ -53,13 +53,13 @@ Imagina cinco filósofos sentados alrededor de una mesa circular. Cada filósofo
 ### 1. **Deadlock (Interbloqueo)**
 Si todos los filósofos toman simultáneamente el tenedor de su izquierda, ninguno podrá tomar el tenedor de su derecha. Todos quedarían esperando eternamente.
 
+**Escenario de deadlock**: Todos tienen su tenedor izquierdo y esperan el derecho
 ```
-        🧔 (tiene izq, espera der)
-         ↓                      ↑
-        🍴                      🍴
-         ↓                      ↑
-🧔 ← 🍴 ← 🧔          🧔 → 🍴 → 🧔
-     (espera izq)  (tiene der, espera izq)
+  F1 (tiene izq) --espera--> 🍴 <--tiene-- F2 (espera der)
+                              ↑              ↓
+                            tiene          espera
+                              ↑              ↓
+  F5 (espera der) --tiene--> 🍴 ... en círculo ...
 ```
 
 ### 2. **Starvation (Inanición)**
