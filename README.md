@@ -1,4 +1,4 @@
-# 🍝 El Problema de los Filósofos Comensales
+# 🍝 El Problema de los Filósofos
 
 ## 📖 Descripción del Problema
 
@@ -138,3 +138,5 @@ Este problema es análogo a situaciones reales como:
 ---
 
 **Nota**: Este es un problema teórico diseñado para ilustrar conceptos de concurrencia. Las soluciones prácticas deben adaptarse según el contexto y requisitos específicos del sistema.
+
+-fsanitize=thread

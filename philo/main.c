@@ -14,8 +14,20 @@
 
 int	main(int ac, char **av)
 {
+	t_philo	philo;
+
 	if (!check_input(ac, av))
 	{
-		ft_puterror("Usage: ./philo n_philos time_die time_eat time_sleep times_eat");
+		ft_puterror("Usage: ./philo n_philos time_die time_eat time_sleep");
+		ft_puterror("(Optional arg) n_times_must_eat");
+		return (1);
 	}
+	save_input(&philo, av, ac);
+	if (!create_threads(philo))
+	{
+		ft_puterror("Failed to create philosophers!!");
+		return (1);
+	}
+		
+	return (0);
 }
