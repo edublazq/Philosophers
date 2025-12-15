@@ -15,13 +15,14 @@
 
 # include <stdio.h>
 # include <stdlib.h>
+# include <stdbool.h>
 # include <pthread.h>
 # include <sys/time.h>
 
 typedef struct s_table
 {
-	int	philos;
-	int	*forks;
+	int		philos;
+	bool	*forks;
 }	t_table;
 
 typedef struct s_philo
