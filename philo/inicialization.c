@@ -30,7 +30,7 @@ int	check_input(int ac, char **av)
 	return (1);
 }
 
-void	save_info(t_philo *philo, char **av, int ac)
+int	save_info(t_philo *philo, char **av, int ac)
 {
 	philo->n_philosophers = ft_atoi(av[1]);
 	philo->time_to_die = ft_atoi(av[2]);
@@ -38,11 +38,12 @@ void	save_info(t_philo *philo, char **av, int ac)
 	philo->time_to_sleep = ft_atoi(av[4]);
 	if (ac == 6)
 		philo->n_times = ft_atoi(av[5]);
-}
-
-void	create_threads(t_philo *philo)
-{
-	philo->threads = malloc(sizeof(pthread_t) * philo->n_philosophers);
-	if (!(philo->threads))
+	else
+		philo->n_times = -1;
+	philo->threads = ft_calloc(sizeof(pthread_t), philo->n_philosophers);
+	if (!philo->threads)
 		return (0);
+	philo->table.forks = ft_calloc(sizeof(int), philo->n_philosophers);
+	philo->table.philos = 0;
+	return (1);
 }

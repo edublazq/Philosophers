@@ -23,6 +23,26 @@ void	ft_puterror(const char *s)
 		write(2, &s[i++], 1);
 }
 
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	void	*ptr;
+	size_t	i;
+
+	i = 0;
+	if (size != 0 && nmemb >= __INT_MAX__ / size)
+		return (NULL);
+	ptr = malloc(nmemb * size);
+	if (!ptr)
+		return (NULL);
+	while (i < nmemb * size)
+	{
+		((unsigned char *)ptr)[i] = 0;
+		i++;
+	}
+	return (ptr);
+}
+
+
 static unsigned int	ft_isspace(char c)
 {
 	if ((c >= 9 && c <= 13) || c == ' ')

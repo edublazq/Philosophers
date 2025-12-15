@@ -22,12 +22,8 @@ int	main(int ac, char **av)
 		ft_puterror("(Optional arg) n_times_must_eat");
 		return (1);
 	}
-	save_input(&philo, av, ac);
-	if (!create_threads(philo))
-	{
-		ft_puterror("Failed to create philosophers!!");
-		return (1);
-	}
-		
+	if (!save_input(&philo, av, ac))
+		return (ft_puterror("Malloc failed!"), 1);
+	
 	return (0);
 }
