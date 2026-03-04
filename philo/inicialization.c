@@ -53,4 +53,4 @@ int	save_info(t_philo *philo, char **av, int ac)
 	while (i < philo->n_philos)
 		philo->philos[i++].dead = false;
 	return (1);
-}
+

@@ -22,8 +22,17 @@ int	main(int ac, char **av)
 		ft_puterror("(Optional arg) n_times_must_eat");
 		return (1);
 	}
+<<<<<<< Updated upstream
 	if (!save_input(&philo, av, ac))
 		return (ft_puterror("Malloc failed!"), 1);
 	
+=======
+	save_input(&philo, av, ac);
+	if (!create_threads(philo))
+	{
+		ft_puterror("Failed to create philosophers!!");
+		return (1);
+	}
+>>>>>>> Stashed changes
 	return (0);
 }
