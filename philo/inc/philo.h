@@ -15,9 +15,14 @@
 
 # include <stdio.h>
 # include <stdlib.h>
+# include <unistd.h>
+# include <errno.h>
 # include <stdbool.h>
 # include <pthread.h>
 # include <sys/time.h>
+# include <sys/types.h>
+
+struct	s_philo;
 
 typedef struct s_table
 {
@@ -27,8 +32,14 @@ typedef struct s_table
 
 typedef struct s_each
 {
-	int		n_foods;	
-	bool	dead;
+	struct s_table	*table;
+	struct s_philo	*main_struct;
+	pthread_t		thread;
+	int				id;
+	int				n_foods;
+	int				dead;
+	pthread_mutex_t	*left;
+	pthread_mutex_t	*right;
 }	t_each;
 
 typedef struct s_philo
@@ -38,15 +49,20 @@ typedef struct s_philo
 	int			time_to_eat;
 	int			time_to_sleep;
 	int			n_times;
-	pthread_t	master;
+	pthread_t	monitor;
 	t_table		table;
-	t_each		*philos;
+	t_each		*each;
 }	t_philo;
 
+/* INICIALIZATION */
+int		save_info(t_philo *philo, char **av, int ac);
+int		create_philo(t_each *each, int n_philos);
+
+/* UTILS */
+void	ft_sleep(int ms);
 int		ft_atoi(const char *nptr);
 void	ft_puterror(const char *s);
 int		check_input(int ac, char **av);
-int		save_info(t_philo *philo, char **av, int ac);
 void	*ft_calloc(size_t nmemb, size_t size);
 
 #endif

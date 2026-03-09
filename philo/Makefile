@@ -1,15 +1,26 @@
-NAME = philo
-NAME_BONUS = philo_bonus
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=thread
-RM = rm -rf
-SRCS = main.c inicialiation.c utils.c
-BONUS_SRCS = 
-OBJS = $(SRCS:.c=.o)
-BONUS_OBJS = $(BONUS_SRCS:.c=.o)
+NAME ?= philo
+NAME_BONUS := philo_bonus
+
+CC := cc
+
+CFLAGS ?= -Wall -Wextra -Werror -Wpendantic -g3 -fsanitize=thread
+CPPFLAGS := -Iinc
+
+RM ?= rm -rf
+
+SRCS := main.c inicialization.c utils.c routines.c actions.c
+BONUS_SRCS :=
+
+SRC_DIR := ./src
+SRCS := $(addprefix $(SRC_DIR)/, $(SRCS))
+
+
+OBJS := $(SRCS:$(SRC_DIR)/%.c=$(SRC_DIR)/%.o)
+BONUS_OBJS := $(BONUS_SRCS:.c=.o)
+
 
 %.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o ${<:.c=.o} 
+	@$(CC) $(CPPFLAGS) -c $< -o ${<:.c=.o} 
 
 all: $(NAME)
 

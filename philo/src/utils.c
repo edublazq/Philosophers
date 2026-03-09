@@ -42,7 +42,6 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return (ptr);
 }
 
-
 static unsigned int	ft_isspace(char c)
 {
 	if ((c >= 9 && c <= 13) || c == ' ')
@@ -74,4 +73,13 @@ int	ft_atoi(const char *nptr)
 		i++;
 	}
 	return (num * neg);
+}
+
+void	ft_sleep(int ms)
+{
+	useconds_t	us;
+
+	us = ms * 1000;
+	printf("philo waited %d", ms);
+	usleep(us);
 }

@@ -12,6 +12,13 @@
 
 #include "philo.h"
 
+int	philosophers(t_philo *philo)
+{
+	if (!philo || !create_philo(philo->each, philo->n_philos))
+		return (1);
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	t_philo	philo;
@@ -22,17 +29,6 @@ int	main(int ac, char **av)
 		ft_puterror("(Optional arg) n_times_must_eat");
 		return (1);
 	}
-<<<<<<< Updated upstream
-	if (!save_input(&philo, av, ac))
-		return (ft_puterror("Malloc failed!"), 1);
-	
-=======
 	save_input(&philo, av, ac);
-	if (!create_threads(philo))
-	{
-		ft_puterror("Failed to create philosophers!!");
-		return (1);
-	}
->>>>>>> Stashed changes
-	return (0);
+	return (philosophers(&philo));
 }

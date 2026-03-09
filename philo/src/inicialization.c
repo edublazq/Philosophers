@@ -34,7 +34,7 @@ int	save_info(t_philo *philo, char **av, int ac)
 {
 	int	i;
 
-	philo->n_philosophers = ft_atoi(av[1]);
+	philo->n_philos = ft_atoi(av[1]);
 	philo->time_to_die = ft_atoi(av[2]);
 	philo->time_to_eat = ft_atoi(av[3]);
 	philo->time_to_sleep = ft_atoi(av[4]);
@@ -42,8 +42,8 @@ int	save_info(t_philo *philo, char **av, int ac)
 		philo->n_times = ft_atoi(av[5]);
 	else
 		philo->n_times = -1;
-	philo->philos = ft_calloc(sizeof(t_each), philo->n_philos);
-	if (!philo->philos)
+	philo->each = ft_calloc(sizeof(t_each), philo->n_philos);
+	if (!philo->each)
 		return (0);
 	philo->table.forks = ft_calloc(sizeof(pthread_mutex_t), philo->n_philos);
 	if (!philo->table.forks)
@@ -51,6 +51,21 @@ int	save_info(t_philo *philo, char **av, int ac)
 	philo->table.philos = 0;
 	i = 0;
 	while (i < philo->n_philos)
-		philo->philos[i++].dead = false;
+	{
+		philo->each[i].id = i;
+		philo->each[i++].dead = false;
+	}
 	return (1);
+}
 
+int	create_philo(t_each *each, int n_philos)
+{
+	int	i;
+
+	if (!each)
+		return (0);
+	i = 0;
+	while (i < n_philos)
+		pthread_create(&(each[i++].thread), NULL, r_philos, each);
+	return (1);
+}

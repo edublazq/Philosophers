@@ -12,10 +12,17 @@
 
 #include "philo.h"
 
-void	*rutina(void *args)
+void	*r_master(void *args)
+{
+	
+}
+
+void	*r_philos(void *args)
 {
 	t_philo	*philo;
 
 	philo = (t_philo *)args;
+	if (!philo)
+		return (NULL);
 	
 }
