@@ -16,13 +16,21 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <errno.h>
 # include <stdbool.h>
 # include <pthread.h>
 # include <sys/time.h>
 # include <sys/types.h>
 
 struct	s_philo;
+
+typedef enum	e_error
+{
+	OK = 0,
+	MALLOC_ERR,
+	THREAD_ERR,
+	MUTEX_ERR,
+	ARG_ERR
+}	t_error;
 
 typedef struct s_table
 {
@@ -57,7 +65,7 @@ typedef struct s_philo
 
 /* INICIALIZATION */
 int		save_info(t_philo *philo, char **av, int ac);
-int		create_philo(t_each *each, int n_philos);
+int		create_philo(t_philo *philo);
 
 /* UTILS */
 void	ft_sleep(int ms);
@@ -65,8 +73,9 @@ int		ft_atoi(const char *nptr);
 void	ft_puterror(const char *s);
 int		check_input(int ac, char **av);
 void	*ft_calloc(size_t nmemb, size_t size);
+int		ft_isdigit(int c);
 
 /* DOOM EXIT */
-int		doom_exit(t_philo *philo, int flag);
+int		doom_exit(t_philo *philo, t_error flag);
 
 #endif

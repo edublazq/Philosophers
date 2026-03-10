@@ -14,7 +14,7 @@
 
 int	philosophers(t_philo *philo)
 {
-	if (!philo || !create_philo(philo->each, philo->n_philos))
+	if (!philo || create_philo(philo) != OK)
 		return (1);
 	return (0);
 }
@@ -25,9 +25,9 @@ int	main(int ac, char **av)
 
 	if (!check_input(ac, av))
 	{
-		ft_puterror("Usage: ./philo n_philos time_die time_eat time_sleep");
+		ft_puterror("Usage: ./philo n_philos time_die time_eat time_sleep ");
 		ft_puterror("(Optional arg) n_times_must_eat");
-		return (1);
+		return (ARG_ERR);
 	}
 	save_input(&philo, av, ac);
 	return (philosophers(&philo));

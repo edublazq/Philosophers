@@ -58,22 +58,22 @@ int	save_info(t_philo *philo, char **av, int ac)
 	return (1);
 }
 
-int	create_philo(t_each *each, int n_philos, t_philo *philo)
+int	create_philo(t_philo *philo)
 {
-	int	i;
-	int	control;
+	int		i;
+	int		control;
+	t_each	*each;
 
-	if (!each)
-		return (0);
+	if (!philo->each)
+		return (MALLOC_ERR);
 	i = 0;
 	control = 0;
-	while (i < n_philos)
+	each = philo->each;
+	while (i < philo->n_philos)
 	{
 		control = pthread_create(&(each[i++].thread), NULL, r_philos, each);
 		if (control != 0)
-			return (doom_exit(philo));
+			return (doom_exit(philo, THREAD_ERR));
 	}
-	return (1);
+	return (OK);
 }
-
-void	create_

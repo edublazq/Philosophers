@@ -42,10 +42,25 @@ static void	free_all(t_philo *philo)
 	free(philo->table.forks);
 }
 
-int	doom_exit(t_philo *philo, int flag)
+static void	print_error(t_error err)
+{
+	if (err == OK)
+		return ;
+	else if (err == MALLOC_ERR)
+		ft_puterror("Philosophers: malloc error\n");
+	else if (err == THREAD_ERR)
+		ft_puterror("Philosophers: thread error\n");
+	else if (err == MUTEX_ERR)
+		ft_puterror("Philosophers: mutex error\n");
+	else if (err == ARG_ERR)
+		ft_puterror("Philosophers: arg error\n");
+}
+
+int	doom_exit(t_philo *philo, t_error flag)
 {
 	join_threads(philo);
 	destroy_mutex(philo);
 	free_all(philo);
+	print_error(flag);
 	return (flag);
 }
