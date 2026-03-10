@@ -1,4 +1,5 @@
 #include <pthread.h>
+#include <unistd.h>
 #include <stdio.h>
 
 int	contador = 0;
@@ -6,13 +7,14 @@ int	contador = 0;
 void	*rutina(void *mutex_c)
 {
 	printf("Soy un hijo y estoy intentando acceder a una función\n");
-	pthread_mutex_lock(mutex_c);
 	for (int i = 0; i < 100; i++)
 	{
+		pthread_mutex_lock(mutex_c);
 		contador++;
 		printf("%d\n", (int)pthread_self());
+		pthread_mutex_unlock(mutex_c);
+		usleep(100);
 	}
-	pthread_mutex_unlock(mutex_c);
 	return (NULL);
 }
 

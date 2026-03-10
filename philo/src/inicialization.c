@@ -52,20 +52,28 @@ int	save_info(t_philo *philo, char **av, int ac)
 	i = 0;
 	while (i < philo->n_philos)
 	{
-		philo->each[i].id = i;
+		philo->each[i].id = i + 1;
 		philo->each[i++].dead = false;
 	}
 	return (1);
 }
 
-int	create_philo(t_each *each, int n_philos)
+int	create_philo(t_each *each, int n_philos, t_philo *philo)
 {
 	int	i;
+	int	control;
 
 	if (!each)
 		return (0);
 	i = 0;
+	control = 0;
 	while (i < n_philos)
-		pthread_create(&(each[i++].thread), NULL, r_philos, each);
+	{
+		control = pthread_create(&(each[i++].thread), NULL, r_philos, each);
+		if (control != 0)
+			return (doom_exit(philo));
+	}
 	return (1);
 }
+
+void	create_

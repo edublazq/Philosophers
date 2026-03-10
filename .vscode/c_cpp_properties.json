@@ -3,12 +3,14 @@
   "configurations": [
     {
       "name": "Linux",
-      "compilerPath": "/usr/bin/gcc",
+      "compilerPath": "/usr/bin/cc",
       "intelliSenseMode": "linux-gcc-x64",
-      "cStandard": "gnu11",
-      "cppStandard": "gnu++17",
+      "cStandard": "c11",
       "includePath": [
-        "${workspaceFolder}/**"
+        "${workspaceFolder}/**",
+        "${workspaceFolder}/philo/inc",
+        "/usr/include",
+        "/usr/local/include"
       ]
     }
   ]

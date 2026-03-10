@@ -50,6 +50,7 @@ typedef struct s_philo
 	int			time_to_sleep;
 	int			n_times;
 	pthread_t	monitor;
+	pthread_t	write;
 	t_table		table;
 	t_each		*each;
 }	t_philo;
@@ -64,5 +65,8 @@ int		ft_atoi(const char *nptr);
 void	ft_puterror(const char *s);
 int		check_input(int ac, char **av);
 void	*ft_calloc(size_t nmemb, size_t size);
+
+/* DOOM EXIT */
+int		doom_exit(t_philo *philo, int flag);
 
 #endif
