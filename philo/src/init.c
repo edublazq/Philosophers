@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-int	check_input(int ac, char **av)
+static int	check_input(int ac, char **av)
 {
 	size_t	i;
 	size_t	j;
@@ -38,6 +38,34 @@ int	parse(int ac, char **av, t_data *data)
 {
 	if (check_input(ac, av))
 		return (EXIT_FAILURE);
-	
+	data->n_philos = ft_atoi(av[1]);
+	data->time_to_die = ft_atoi(av[2]);
+	data->time_to_eat = ft_atoi(av[3]);
+	data->time_to_sleep = ft_atoi(av[4]);
+	if (ac == 6)
+		data->n_times = ft_atoi(av[5]);
+	else
+		data->n_times = -1;
 	return (EXIT_SUCCESS);
+}
+
+int	init_mutex(t_data *data)
+{
+	size_t	i;
+
+	data->forks = malloc(sizeof(pthread_mutex_t) * data->n_philos);
+	if (!data->forks)
+		return (EXIT_FAILURE);
+	i = 0;
+	while (i < data->n_philos)
+		pthread_mutex_init(&data->forks[i++], NULL);
+	pthread_mutex_init(&data->write, NULL);
+	return (EXIT_SUCCESS);
+}
+
+int	init_threads(t_data *data)
+{
+	data->each = malloc(sizeof(t_each) * data->n_philos);
+	if (!data->each)
+		return (free(data->forks), EXIT_FAILURE);
 }

@@ -16,5 +16,9 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 
+	if (parse(ac, av, &data))
+		return (EXIT_FAILURE);
+	if (create_mutex(&data) || create_threads(&data))
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

@@ -47,8 +47,15 @@ typedef struct s_data
 	t_each			*each;
 }					t_data;
 
+/* utils */
+
 size_t	ft_strlen(const char *s);
 int		ft_isdigit(int c);
 int		ft_atoi(const char *nptr);
+
+/* init */
+int		parse(int ac, char **av, t_data *data);
+int		init_mutex(t_data *data);
+int		init_threads(t_data *data);
 
 #endif
