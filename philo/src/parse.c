@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_manager.c                                    :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edblazqu <edblazqu@student.42madrid.c      +#+  +:+       +#+        */
+/*   By: edblazqu <edblazqu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/15 08:07:34 by edblazqu          #+#    #+#             */
-/*   Updated: 2025/12/15 08:07:35 by edblazqu         ###   ########.fr       */
+/*   Created: 2026/03/12 15:46:15 by edblazqu          #+#    #+#             */
+/*   Updated: 2026/03/12 15:46:15 by edblazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*r_master(void *args)
+int	check_input(int ac, char **av)
 {
 	
 }
 
-void	*r_philos(void *args)
+int	parse(int ac, char **av, t_data *data)
 {
-	t_philo	*philo;
-
-	philo = (t_philo *)args;
-	if (!philo)
-		return (NULL);
+	if (check_input(ac, av))
+		return (EXIT_FAILURE);
 	
+	return (EXIT_SUCCESS);
 }

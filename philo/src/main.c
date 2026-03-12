@@ -3,32 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edblazqu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: edblazqu <edblazqu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/09 12:29:54 by edblazqu          #+#    #+#             */
-/*   Updated: 2025/12/09 12:29:54 by edblazqu         ###   ########.fr       */
+/*   Created: 2026/03/12 15:45:43 by edblazqu          #+#    #+#             */
+/*   Updated: 2026/03/12 15:45:45 by edblazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	philosophers(t_philo *philo)
-{
-	if (!philo || create_philo(philo) != OK)
-		return (1);
-	return (0);
-}
-
 int	main(int ac, char **av)
 {
-	t_philo	philo;
+	t_data	data;
 
-	if (!check_input(ac, av))
-	{
-		ft_puterror("Usage: ./philo n_philos time_die time_eat time_sleep ");
-		ft_puterror("(Optional arg) n_times_must_eat");
-		return (ARG_ERR);
-	}
-	save_input(&philo, av, ac);
-	return (philosophers(&philo));
+	return (EXIT_SUCCESS);
 }

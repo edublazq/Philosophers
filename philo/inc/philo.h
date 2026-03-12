@@ -23,21 +23,6 @@
 
 struct	s_philo;
 
-typedef enum	e_error
-{
-	OK = 0,
-	MALLOC_ERR,
-	THREAD_ERR,
-	MUTEX_ERR,
-	ARG_ERR
-}	t_error;
-
-typedef struct s_table
-{
-	int				philos;
-	pthread_mutex_t	*forks;
-}	t_table;
-
 typedef struct s_each
 {
 	struct s_table	*table;
@@ -48,34 +33,21 @@ typedef struct s_each
 	int				dead;
 	pthread_mutex_t	*left;
 	pthread_mutex_t	*right;
+	pthread_mutex_t	data;
 }	t_each;
 
-typedef struct s_philo
+typedef struct s_data
 {
-	int			n_philos;
-	int			time_to_die;
-	int			time_to_eat;
-	int			time_to_sleep;
-	int			n_times;
-	pthread_t	monitor;
-	pthread_t	write;
-	t_table		table;
-	t_each		*each;
-}	t_philo;
-
-/* INICIALIZATION */
-int		save_info(t_philo *philo, char **av, int ac);
-int		create_philo(t_philo *philo);
-
-/* UTILS */
-void	ft_sleep(int ms);
-int		ft_atoi(const char *nptr);
-void	ft_puterror(const char *s);
-int		check_input(int ac, char **av);
-void	*ft_calloc(size_t nmemb, size_t size);
-int		ft_isdigit(int c);
-
-/* DOOM EXIT */
-int		doom_exit(t_philo *philo, t_error flag);
+	int				n_philos;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				n_times;
+	int				program_die;
+	pthread_t		monitor;
+	pthread_t		write;
+	pthread_mutex_t	*forks;
+	t_each			*each;
+}					t_data;
 
 #endif

@@ -3,43 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edblazqu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: edblazqu <edblazqu@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/09 12:58:42 by edblazqu          #+#    #+#             */
-/*   Updated: 2025/12/09 12:58:43 by edblazqu         ###   ########.fr       */
+/*   Created: 2026/03/12 15:51:13 by edblazqu          #+#    #+#             */
+/*   Updated: 2026/03/12 15:51:14 by edblazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_puterror(const char *s)
+int	ft_isdigit(int c)
 {
-	int	i;
-
-	i = 0;
-	if (!s)
-		return ;
-	while (s[i])
-		write(2, &s[i++], 1);
-}
-
-void	*ft_calloc(size_t nmemb, size_t size)
-{
-	void	*ptr;
-	size_t	i;
-
-	i = 0;
-	if (size != 0 && nmemb >= __INT_MAX__ / size)
-		return (NULL);
-	ptr = malloc(nmemb * size);
-	if (!ptr)
-		return (NULL);
-	while (i < nmemb * size)
-	{
-		((unsigned char *)ptr)[i] = 0;
-		i++;
-	}
-	return (ptr);
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }
 
 static unsigned int	ft_isspace(char c)
@@ -73,13 +50,4 @@ int	ft_atoi(const char *nptr)
 		i++;
 	}
 	return (num * neg);
-}
-
-void	ft_sleep(int ms)
-{
-	useconds_t	us;
-
-	us = ms * 1000;
-	printf("philo waited %d", ms);
-	usleep(us);
 }
