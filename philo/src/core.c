@@ -12,6 +12,33 @@
 
 #include "philo.h"
 
+void	eat(t_each *philo)
+{
+	pthread_mutex_lock(philo->write);
+	printf("%d %d is eating\n", , philo->id);
+	pthread_mutex_unlock(philo->write);
+}
+
+void	even(t_data *data, t_each *philo)
+{
+	pthread_mutex_lock(philo->left);
+	pthread_mutex_lock(philo->right);
+	eat();
+	pthread_mutex_unlock(philo->left);
+	pthread_mutex_unlock(philo->right);
+	ft_sleep(data->time_to_sleep);
+}
+
+void	odd(t_data *data, t_each *philo)
+{
+	pthread_mutex_lock(philo->right);
+	pthread_mutex_lock(philo->left);
+
+	pthread_mutex_unlock(philo->right);
+	pthread_mutex_unlock(philo->left);
+	ft_sleep(data->time_to_sleep);
+}
+
 void	*routine(void *args)
 {
 	t_each	*philo;
@@ -19,7 +46,11 @@ void	*routine(void *args)
 
 	philo = (t_each *)args;
 	data = philo->main_struct;
-	
+	if (philo->id % 2 == 0)
+		even(data, philo);
+	else
+		odd(data, philo);
+	return (NULL);
 }
 
 int	philosophers(t_data *data)

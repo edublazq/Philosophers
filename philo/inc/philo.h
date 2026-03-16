@@ -48,6 +48,11 @@ typedef struct s_data
 	t_each			*each;
 }					t_data;
 
+/* time */
+
+long	get_time(void);
+void	ft_sleep(long ms);
+
 /* utils */
 
 size_t	ft_strlen(const char *s);
@@ -55,11 +60,13 @@ int		ft_isdigit(int c);
 int		ft_atoi(const char *nptr);
 
 /* init */
+
 int		parse(int ac, char **av, t_data *data);
 int		init_forks(t_data *data);
 int		init_philos(t_data *data);
 
 /* core */
+
 int		philosophers(t_data *data);
 
 #endif

@@ -6,6 +6,10 @@
       "compilerPath": "/usr/bin/cc",
       "intelliSenseMode": "linux-gcc-x64",
       "cStandard": "c11",
+      "defines": [
+        "_DEFAULT_SOURCE",
+        "_XOPEN_SOURCE=700"
+      ],
       "includePath": [
         "${workspaceFolder}/**",
         "${workspaceFolder}/philo/inc",
