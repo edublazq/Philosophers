@@ -33,7 +33,7 @@ typedef struct s_each
 	pthread_mutex_t	*right;
 	pthread_mutex_t	*write;
 	pthread_mutex_t	state;
-}	t_each;
+}					t_each;
 
 typedef struct s_data
 {
@@ -57,6 +57,9 @@ int		ft_atoi(const char *nptr);
 /* init */
 int		parse(int ac, char **av, t_data *data);
 int		init_forks(t_data *data);
-int		init_threads(t_data *data);
+int		init_philos(t_data *data);
+
+/* core */
+int		philosophers(t_data *data);
 
 #endif

@@ -20,5 +20,7 @@ int	main(int ac, char **av)
 		return (EXIT_FAILURE);
 	if (init_forks(&data) || init_philos(&data))
 		return (EXIT_FAILURE);
+	if (philosophers(&data))
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

@@ -8,7 +8,7 @@ CPPFLAGS := -Iinc
 
 RM ?= rm -rf
 
-SRCS := main.c inicialization.c utils.c routines.c actions.c
+SRCS := main.c init.c utils.c
 BONUS_SRCS :=
 
 SRC_DIR := ./src

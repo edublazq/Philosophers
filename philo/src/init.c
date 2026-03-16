@@ -78,12 +78,9 @@ int	init_philos(t_data *data)
 		data->each[i].main_struct = data;
 		data->each[i].dead = 0;
 		data->each[i].id = i + 1;
-		if (i != 0)
-			data->each[i].left = &data->forks[i - 1];
-		else
-			data->each[i].left = &data->forks[data->n_philos - 1];
-		if (i != data->n_philos - 1)
-			data->each[i].right = &data->forks[i];
+		data->each[i].left = &data->forks[data->each[i].id - 1];
+		if (data->each[i].id != i + 1)
+			data->each[i].right = &data->forks[data->each[i].id];
 		else
 			data->each[i].right = &data->forks[0];
 		i++;
