@@ -31,6 +31,7 @@ typedef struct s_each
 	int				dead;
 	pthread_mutex_t	*left;
 	pthread_mutex_t	*right;
+	pthread_mutex_t	*write;
 	pthread_mutex_t	state;
 }	t_each;
 
@@ -55,7 +56,7 @@ int		ft_atoi(const char *nptr);
 
 /* init */
 int		parse(int ac, char **av, t_data *data);
-int		init_mutex(t_data *data);
+int		init_forks(t_data *data);
 int		init_threads(t_data *data);
 
 #endif

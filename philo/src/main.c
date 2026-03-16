@@ -18,7 +18,7 @@ int	main(int ac, char **av)
 
 	if (parse(ac, av, &data))
 		return (EXIT_FAILURE);
-	if (create_mutex(&data) || create_threads(&data))
+	if (init_forks(&data) || init_philos(&data))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

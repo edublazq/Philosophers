@@ -49,7 +49,7 @@ int	parse(int ac, char **av, t_data *data)
 	return (EXIT_SUCCESS);
 }
 
-int	init_mutex(t_data *data)
+int	init_forks(t_data *data)
 {
 	size_t	i;
 
@@ -63,9 +63,30 @@ int	init_mutex(t_data *data)
 	return (EXIT_SUCCESS);
 }
 
-int	init_threads(t_data *data)
+int	init_philos(t_data *data)
 {
+	size_t	i;
+
+	i = 0;
 	data->each = malloc(sizeof(t_each) * data->n_philos);
 	if (!data->each)
 		return (free(data->forks), EXIT_FAILURE);
+	while (i < (size_t)data->n_philos)
+	{
+		pthread_mutex_init(&data->each[i].state, NULL);
+		data->each[i].write = &data->write;
+		data->each[i].main_struct = data;
+		data->each[i].dead = 0;
+		data->each[i].id = i + 1;
+		if (i != 0)
+			data->each[i].left = &data->forks[i - 1];
+		else
+			data->each[i].left = &data->forks[data->n_philos - 1];
+		if (i != data->n_philos - 1)
+			data->each[i].right = &data->forks[i];
+		else
+			data->each[i].right = &data->forks[0];
+		i++;
+	}
+	return (EXIT_SUCCESS);
 }
