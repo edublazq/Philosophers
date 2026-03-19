@@ -12,31 +12,61 @@
 
 #include "philo.h"
 
-void	eat(t_each *philo)
-{
-	pthread_mutex_lock(philo->write);
-	printf("%d %d is eating\n", , philo->id);
-	pthread_mutex_unlock(philo->write);
-}
-
 void	even(t_data *data, t_each *philo)
 {
-	pthread_mutex_lock(philo->left);
-	pthread_mutex_lock(philo->right);
-	eat();
-	pthread_mutex_unlock(philo->left);
-	pthread_mutex_unlock(philo->right);
-	ft_sleep(data->time_to_sleep);
+	long	time;
+	long	meal_time;
+
+	time = get_time();
+	meal_time = get_time();
+	while (1 && data->program_die == 0)
+	{
+		think(philo->write, philo->id, &time);
+		pthread_mutex_lock(philo->left);
+		take_fork(philo->write, philo->id, &time);
+		pthread_mutex_lock(philo->right);
+		take_fork(philo->write, philo->id, &time);
+		if (delta_time(&meal_time) > (long)data->time_to_die)
+		{
+			data->program_die = 1;
+			died(philo->write, philo->id, &time);
+			break ;
+		}
+		ft_sleep(data->time_to_eat);
+		pthread_mutex_unlock(philo->left);
+		pthread_mutex_unlock(philo->right);
+		sleeping(philo->write, philo->id, &time);
+		ft_sleep(data->time_to_sleep);
+	}
 }
 
 void	odd(t_data *data, t_each *philo)
 {
-	pthread_mutex_lock(philo->right);
-	pthread_mutex_lock(philo->left);
+	long	time;
+	long	meal_time;
 
-	pthread_mutex_unlock(philo->right);
-	pthread_mutex_unlock(philo->left);
-	ft_sleep(data->time_to_sleep);
+	time = get_time();
+	meal_time = get_time();
+	while (1 && data->program_die == 0)
+	{
+		think(philo->write, philo->id, &time);
+		pthread_mutex_lock(philo->right);
+		take_fork(philo->write, philo->id, &time);
+		pthread_mutex_lock(philo->left);
+		take_fork(philo->write, philo->id, &time);
+		if (delta_time(&meal_time) > data->time_to_die)
+		{
+			data->program_die = 1;
+			died(philo->write, philo->id, &time);
+			break ;
+		}
+		eat(philo->write, philo->id, &time);
+		ft_sleep(data->time_to_eat);
+		pthread_mutex_unlock(philo->right);
+		pthread_mutex_unlock(philo->left);
+		sleeping(philo->write, philo->id, &time);
+		ft_sleep(data->time_to_sleep);
+	}
 }
 
 void	*routine(void *args)

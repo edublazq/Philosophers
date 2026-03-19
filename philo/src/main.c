@@ -17,7 +17,10 @@ int	main(int ac, char **av)
 	t_data	data;
 
 	if (parse(ac, av, &data))
+	{
+		printf("Usage: number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]");
 		return (EXIT_FAILURE);
+	}
 	if (init_forks(&data) || init_philos(&data))
 		return (EXIT_FAILURE);
 	if (philosophers(&data))

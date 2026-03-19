@@ -12,12 +12,21 @@
 
 #include "philo.h"
 
+long	delta_time(long	*old)
+{
+	long	delta;
+
+	delta = get_time() - *old;
+	*old = get_time();
+	return (delta);
+}
+
 long	get_time(void)
 {
 	struct timeval	time;
 
 	gettimeofday(&time, NULL);
-	return (time.tv_sec * 1000 + time.tv_usec / 1000)
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
 void	ft_sleep(long ms)

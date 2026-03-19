@@ -3,12 +3,12 @@ NAME_BONUS := philo_bonus
 
 CC := cc
 
-CFLAGS ?= -Wall -Wextra -Werror -Wpendantic -g3 -fsanitize=thread
+CFLAGS ?= -Wall -Wextra -Werror -g3 -fsanitize=thread
 CPPFLAGS := -Iinc
 
 RM ?= rm -rf
 
-SRCS := main.c init.c utils.c
+SRCS := main.c init.c utils.c time.c write.c core.c
 BONUS_SRCS :=
 
 SRC_DIR := ./src
@@ -26,7 +26,7 @@ all: $(NAME)
 
 $(NAME):$(OBJS)
 	@echo "Compiling philo..."
-	@$(CC) $(CFLAGS) $(OBJS)-o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 bonus:$(BONUS_OBJS)
 	@echo "Compiling bonus philo..."

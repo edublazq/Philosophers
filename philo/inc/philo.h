@@ -50,6 +50,7 @@ typedef struct s_data
 
 /* time */
 
+long	delta_time(long	*old);
 long	get_time(void);
 void	ft_sleep(long ms);
 
@@ -64,6 +65,13 @@ int		ft_atoi(const char *nptr);
 int		parse(int ac, char **av, t_data *data);
 int		init_forks(t_data *data);
 int		init_philos(t_data *data);
+
+/* write */
+void	take_fork(pthread_mutex_t *write, int id, long *time);
+void	eat(pthread_mutex_t *write, int id, long *time);
+void	sleeping(pthread_mutex_t *write, int id, long *time);
+void	think(pthread_mutex_t *write, int id, long *time);
+void	died(pthread_mutex_t *write, int id, long *time);
 
 /* core */
 

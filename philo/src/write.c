@@ -1,0 +1,48 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   write.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: edblazqu <edblazqu@student.42madrid.c      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/17 12:09:32 by edblazqu          #+#    #+#             */
+/*   Updated: 2026/03/17 12:09:32 by edblazqu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "philo.h"
+
+void	take_fork(pthread_mutex_t *write, int id, long *time)
+{
+	pthread_mutex_lock(write);
+	printf("%ld %d has taken a fork\n", delta_time(time), id);
+	pthread_mutex_unlock(write);
+}
+
+void	eat(pthread_mutex_t *write, int id, long *time)
+{
+	pthread_mutex_lock(write);
+	printf("%ld %d is eating\n", delta_time(time), id);
+	pthread_mutex_unlock(write);
+}
+
+void	sleeping(pthread_mutex_t *write, int id, long *time)
+{
+	pthread_mutex_lock(write);
+	printf("%ld %d is sleeping\n", delta_time(time), id);
+	pthread_mutex_unlock(write);
+}
+
+void	died(pthread_mutex_t *write, int id, long *time)
+{
+	pthread_mutex_lock(write);
+	printf("%ld %d died\n", delta_time(time), id);
+	pthread_mutex_unlock(write);
+}
+
+void	think(pthread_mutex_t *write, int id, long *time)
+{
+	pthread_mutex_lock(write);
+	printf("%ld %d is thinking\n", delta_time(time), id);
+	pthread_mutex_unlock(write);
+}

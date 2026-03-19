@@ -38,6 +38,7 @@ int	parse(int ac, char **av, t_data *data)
 {
 	if (check_input(ac, av))
 		return (EXIT_FAILURE);
+	data->program_die = 0;
 	data->n_philos = ft_atoi(av[1]);
 	data->time_to_die = ft_atoi(av[2]);
 	data->time_to_eat = ft_atoi(av[3]);
