@@ -14,7 +14,13 @@
 
 void	monitorize(t_data *data, int n_philos)
 {
-	
+	int	i;
+
+	i = 0;
+	while (i < n_philos)
+	{
+		
+	}
 }
 
 void	*r_monitor(void *args)

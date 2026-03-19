@@ -15,28 +15,28 @@
 void	even(t_data *data, t_each *philo)
 {
 	long	time;
-	long	meal_time;
 
 	time = get_time();
-	meal_time = get_time();
+	philo->last_meal = get_time();
 	while (1 && data->program_die == 0)
 	{
-		think(philo->write, philo->id, &time);
+		think(philo->write, philo->id, time);
 		if (philo->left < philo->right)
 		{
-			take_fork(philo->left, philo->write, philo->id, &time);
-			take_fork(philo->right, philo->write, philo->id, &time);
+			take_fork(philo->left, philo->write, philo->id, time);
+			take_fork(philo->right, philo->write, philo->id, time);
 		}
 		else
 		{
-			take_fork(philo->right, philo->write, philo->id, &time);
-			take_fork(philo->left, philo->write, philo->id, &time);
+			take_fork(philo->right, philo->write, philo->id, time);
+			take_fork(philo->left, philo->write, philo->id, time);
 		}
-		eat(philo->write, philo->id, &time);
+		eat(philo->write, philo->id, time);
 		ft_sleep(data->time_to_eat);
+		philo->last_meal = get_time();
 		pthread_mutex_unlock(philo->left);
 		pthread_mutex_unlock(philo->right);
-		sleeping(philo->write, philo->id, &time);
+		sleeping(philo->write, philo->id, time);
 		ft_sleep(data->time_to_sleep);
 	}
 }
@@ -50,22 +50,22 @@ void	odd(t_data *data, t_each *philo)
 	meal_time = get_time();
 	while (1 && data->program_die == 0)
 	{
-		think(philo->write, philo->id, &time);
+		think(philo->write, philo->id, time);
 		if (philo->left < philo->right)
 		{
-			take_fork(philo->left, philo->write, philo->id, &time);
-			take_fork(philo->right, philo->write, philo->id, &time);
+			take_fork(philo->left, philo->write, philo->id, time);
+			take_fork(philo->right, philo->write, philo->id, time);
 		}
 		else
 		{
-			take_fork(philo->right, philo->write, philo->id, &time);
-			take_fork(philo->left, philo->write, philo->id, &time);
+			take_fork(philo->right, philo->write, philo->id, time);
+			take_fork(philo->left, philo->write, philo->id, time);
 		}
-		eat(philo->write, philo->id, &time);
+		eat(philo->write, philo->id, time);
 		ft_sleep(data->time_to_eat);
 		pthread_mutex_unlock(philo->right);
 		pthread_mutex_unlock(philo->left);
-		sleeping(philo->write, philo->id, &time);
+		sleeping(philo->write, philo->id, time);
 		ft_sleep(data->time_to_sleep);
 	}
 }

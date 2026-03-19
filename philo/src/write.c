@@ -13,7 +13,7 @@
 #include "philo.h"
 
 void	take_fork(pthread_mutex_t *fork, pthread_mutex_t *write,
-		int id, long *time)
+		int id, long time)
 {
 	pthread_mutex_lock(fork);
 	pthread_mutex_lock(write);
@@ -21,28 +21,28 @@ void	take_fork(pthread_mutex_t *fork, pthread_mutex_t *write,
 	pthread_mutex_unlock(write);
 }
 
-void	eat(pthread_mutex_t *write, int id, long *time)
+void	eat(pthread_mutex_t *write, int id, long time)
 {
 	pthread_mutex_lock(write);
 	printf("%ld %d is eating\n", delta_time(time), id);
 	pthread_mutex_unlock(write);
 }
 
-void	sleeping(pthread_mutex_t *write, int id, long *time)
+void	sleeping(pthread_mutex_t *write, int id, long time)
 {
 	pthread_mutex_lock(write);
 	printf("%ld %d is sleeping\n", delta_time(time), id);
 	pthread_mutex_unlock(write);
 }
 
-void	died(pthread_mutex_t *write, int id, long *time)
+void	died(pthread_mutex_t *write, int id, long time)
 {
 	pthread_mutex_lock(write);
 	printf("%ld %d died\n", delta_time(time), id);
 	pthread_mutex_unlock(write);
 }
 
-void	think(pthread_mutex_t *write, int id, long *time)
+void	think(pthread_mutex_t *write, int id, long time)
 {
 	pthread_mutex_lock(write);
 	printf("%ld %d is thinking\n", delta_time(time), id);

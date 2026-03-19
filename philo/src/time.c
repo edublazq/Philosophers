@@ -12,12 +12,11 @@
 
 #include "philo.h"
 
-long	delta_time(long	*old)
+long	delta_time(long	old)
 {
 	long	delta;
 
-	delta = get_time() - *old;
-	*old = get_time();
+	delta = get_time() - old;
 	return (delta);
 }
 
