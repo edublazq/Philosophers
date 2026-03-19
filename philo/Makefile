@@ -20,7 +20,7 @@ BONUS_OBJS := $(BONUS_SRCS:.c=.o)
 
 
 %.o: %.c
-	@$(CC) $(CPPFLAGS) -c $< -o ${<:.c=.o} 
+	@$(CC) $(CPPFLAGS) -c $< -o $@
 
 all: $(NAME)
 

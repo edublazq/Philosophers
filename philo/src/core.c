@@ -22,16 +22,17 @@ void	even(t_data *data, t_each *philo)
 	while (1 && data->program_die == 0)
 	{
 		think(philo->write, philo->id, &time);
-		pthread_mutex_lock(philo->left);
-		take_fork(philo->write, philo->id, &time);
-		pthread_mutex_lock(philo->right);
-		take_fork(philo->write, philo->id, &time);
-		if (delta_time(&meal_time) > (long)data->time_to_die)
+		if (philo->left < philo->right)
 		{
-			data->program_die = 1;
-			died(philo->write, philo->id, &time);
-			break ;
+			take_fork(philo->left, philo->write, philo->id, &time);
+			take_fork(philo->right, philo->write, philo->id, &time);
 		}
+		else
+		{
+			take_fork(philo->right, philo->write, philo->id, &time);
+			take_fork(philo->left, philo->write, philo->id, &time);
+		}
+		eat(philo->write, philo->id, &time);
 		ft_sleep(data->time_to_eat);
 		pthread_mutex_unlock(philo->left);
 		pthread_mutex_unlock(philo->right);
@@ -50,15 +51,15 @@ void	odd(t_data *data, t_each *philo)
 	while (1 && data->program_die == 0)
 	{
 		think(philo->write, philo->id, &time);
-		pthread_mutex_lock(philo->right);
-		take_fork(philo->write, philo->id, &time);
-		pthread_mutex_lock(philo->left);
-		take_fork(philo->write, philo->id, &time);
-		if (delta_time(&meal_time) > data->time_to_die)
+		if (philo->left < philo->right)
 		{
-			data->program_die = 1;
-			died(philo->write, philo->id, &time);
-			break ;
+			take_fork(philo->left, philo->write, philo->id, &time);
+			take_fork(philo->right, philo->write, philo->id, &time);
+		}
+		else
+		{
+			take_fork(philo->right, philo->write, philo->id, &time);
+			take_fork(philo->left, philo->write, philo->id, &time);
 		}
 		eat(philo->write, philo->id, &time);
 		ft_sleep(data->time_to_eat);
@@ -77,7 +78,10 @@ void	*routine(void *args)
 	philo = (t_each *)args;
 	data = philo->main_struct;
 	if (philo->id % 2 == 0)
+	{
 		even(data, philo);
+		ft_sleep(3);
+	}
 	else
 		odd(data, philo);
 	return (NULL);

@@ -12,8 +12,10 @@
 
 #include "philo.h"
 
-void	take_fork(pthread_mutex_t *write, int id, long *time)
+void	take_fork(pthread_mutex_t *fork, pthread_mutex_t *write,
+		int id, long *time)
 {
+	pthread_mutex_lock(fork);
 	pthread_mutex_lock(write);
 	printf("%ld %d has taken a fork\n", delta_time(time), id);
 	pthread_mutex_unlock(write);
