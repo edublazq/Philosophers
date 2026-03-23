@@ -12,7 +12,7 @@
       ],
       "includePath": [
         "${workspaceFolder}/**",
-        "${workspaceFolder}/philo/inc",
+        "${workspaceFolder}/philo/include",
         "/usr/include",
         "/usr/local/include"
       ]

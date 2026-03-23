@@ -25,5 +25,6 @@ int	main(int ac, char **av)
 		return (EXIT_FAILURE);
 	if (philosophers(&data))
 		return (EXIT_FAILURE);
+	nukem(&data);
 	return (EXIT_SUCCESS);
 }
