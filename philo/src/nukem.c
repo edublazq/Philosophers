@@ -27,7 +27,7 @@ static void	destroy_mutex(t_data *data)
 
 static void	kill_threads(t_each *each)
 {
-	t_data *data;
+	t_data	*data;
 
 	data = each->main_struct;
 	free(data->forks);

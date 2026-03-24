@@ -27,8 +27,11 @@ typedef struct s_each
 	struct s_data	*main_struct;
 	pthread_t		thread;
 	int				id;
+	int				finished;
+	int				im_the_one;
 	int				n_foods;
 	int				dead;
+	long			time;
 	long			last_meal;
 	pthread_mutex_t	*left;
 	pthread_mutex_t	*right;
@@ -44,6 +47,7 @@ typedef struct s_data
 	int				time_to_sleep;
 	int				n_times;
 	int				program_die;
+	pthread_t		monitor;
 	pthread_mutex_t	write;
 	pthread_mutex_t	*forks;
 	t_each			*each;
@@ -51,7 +55,7 @@ typedef struct s_data
 
 /* time */
 
-long	delta_time(long	old);
+long	delta_time(long old);
 long	get_time(void);
 void	ft_sleep(long ms);
 
@@ -78,5 +82,7 @@ void	died(pthread_mutex_t *write, int id, long time);
 /* core */
 
 int		philosophers(t_data *data);
+void	*r_monitor(void *args);
+void	nukem(t_data *data);
 
 #endif
