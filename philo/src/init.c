@@ -23,6 +23,8 @@ static int	check_input(int ac, char **av)
 	while ((i < 6 && ac == 6) || (i < 5 && ac == 5))
 	{
 		j = 0;
+		if (!av[i])
+			return (EXIT_FAILURE);
 		while (j < ft_strlen(av[i]))
 		{
 			if (!ft_isdigit(av[i][j]))
@@ -41,10 +43,18 @@ int	parse(int ac, char **av, t_data *data)
 	data->program_die = 0;
 	data->n_philos = ft_atoi(av[1]);
 	data->time_to_die = ft_atoi(av[2]);
+	if (data->n_philos <= 0 || data->time_to_die <= 0)
+		return (EXIT_FAILURE);
 	data->time_to_eat = ft_atoi(av[3]);
 	data->time_to_sleep = ft_atoi(av[4]);
+	if (data->time_to_eat <= 0 || data->time_to_sleep <= 0)
+		return (EXIT_FAILURE);
 	if (ac == 6)
+	{
 		data->n_times = ft_atoi(av[5]);
+		if (data->n_times <= 0)
+			return (EXIT_FAILURE);
+	}
 	else
 		data->n_times = -1;
 	return (EXIT_SUCCESS);
@@ -77,6 +87,7 @@ int	init_philos(t_data *data)
 		pthread_mutex_init(&data->each[i].state, NULL);
 		data->each[i].write = &data->write;
 		data->each[i].main_struct = data;
+		data->each[i].n_foods = 0;
 		data->each[i].dead = 0;
 		data->each[i].id = i + 1;
 		data->each[i].im_the_one = 0;

@@ -18,7 +18,7 @@ void	even(t_data *data, t_each *philo)
 	philo->last_meal = get_time();
 	while (1 && data->program_die == 0)
 	{
-		think(philo->write, philo->id, philo->time);
+		think(philo);
 		if (philo->left < philo->right)
 		{
 			take_fork(philo->left, philo->write, philo->id, philo->time);
@@ -29,14 +29,16 @@ void	even(t_data *data, t_each *philo)
 			take_fork(philo->right, philo->write, philo->id, philo->time);
 			take_fork(philo->left, philo->write, philo->id, philo->time);
 		}
-		eat(philo->write, philo->id, philo->time);
+		eat(philo);
 		philo->n_foods++;
 		ft_sleep(data->time_to_eat);
 		pthread_mutex_unlock(philo->left);
 		pthread_mutex_unlock(philo->right);
-		sleeping(philo->write, philo->id, philo->time);
+		sleeping(philo);
 		ft_sleep(data->time_to_sleep);
 	}
+	if (philo->im_the_one)
+		died(philo);
 }
 
 void	odd(t_data *data, t_each *philo)
@@ -45,7 +47,7 @@ void	odd(t_data *data, t_each *philo)
 	philo->last_meal = get_time();
 	while (data->program_die == 0 && philo->finished == 0)
 	{
-		think(philo->write, philo->id, philo->time);
+		think(philo);
 		if (philo->left < philo->right)
 		{
 			take_fork(philo->left, philo->write, philo->id, philo->time);
@@ -56,16 +58,15 @@ void	odd(t_data *data, t_each *philo)
 			take_fork(philo->right, philo->write, philo->id, philo->time);
 			take_fork(philo->left, philo->write, philo->id, philo->time);
 		}
-		eat(philo->write, philo->id, philo->time);
-		philo->n_foods++;
+		eat(philo);
 		ft_sleep(data->time_to_eat);
 		pthread_mutex_unlock(philo->right);
 		pthread_mutex_unlock(philo->left);
-		sleeping(philo->write, philo->id, philo->time);
+		sleeping(philo);
 		ft_sleep(data->time_to_sleep);
 	}
 	if (philo->im_the_one)
-		died(philo->write, philo->id, philo->time);
+		died(philo);
 }
 
 void	*routine(void *args)

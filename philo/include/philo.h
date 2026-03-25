@@ -74,10 +74,10 @@ int		init_philos(t_data *data);
 /* write */
 void	take_fork(pthread_mutex_t *fork, pthread_mutex_t *write,
 			int id, long time);
-void	eat(pthread_mutex_t *write, int id, long time);
-void	sleeping(pthread_mutex_t *write, int id, long time);
-void	think(pthread_mutex_t *write, int id, long time);
-void	died(pthread_mutex_t *write, int id, long time);
+void	eat(t_each *philo);
+void	sleeping(t_each *philo);
+void	think(t_each *philo);
+void	died(t_each *philo);
 
 /* core */
 
