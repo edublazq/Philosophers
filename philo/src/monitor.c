@@ -35,7 +35,6 @@ void	monitorize(t_data *data, int n_philos)
 void	*r_monitor(void *args)
 {
 	t_data	*data;
-	int		i;
 
 	data = (t_data *)args;
 	while (data->program_die == 0)

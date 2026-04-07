@@ -62,15 +62,19 @@ int	parse(int ac, char **av, t_data *data)
 
 int	init_forks(t_data *data)
 {
-	size_t	i;
+	int	i;
 
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->n_philos);
 	if (!data->forks)
 		return (EXIT_FAILURE);
 	i = 0;
 	while (i < data->n_philos)
+	{
 		pthread_mutex_init(&data->forks[i++], NULL);
+		pthread_mutex_init(&data->each[i].state, NULL);
+	}
 	pthread_mutex_init(&data->write, NULL);
+	pthread_mutex_init(&data->dead, NULL);
 	return (EXIT_SUCCESS);
 }
 
@@ -84,7 +88,6 @@ int	init_philos(t_data *data)
 		return (free(data->forks), EXIT_FAILURE);
 	while (i < (size_t)data->n_philos)
 	{
-		pthread_mutex_init(&data->each[i].state, NULL);
 		data->each[i].write = &data->write;
 		data->each[i].main_struct = data;
 		data->each[i].n_foods = 0;

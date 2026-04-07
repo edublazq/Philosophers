@@ -3,12 +3,12 @@ NAME_BONUS := philo_bonus
 
 CC := cc
 
-CFLAGS ?= -Wall -Wextra -Werror -g3 -fsanitize=thread
-CPPFLAGS := -Iinclude
+CFLAGS ?= -Wall -Wextra -Werror -g3
+CPPFLAGS := -Iinclude -Wall -Wextra -Werror -g3
 
 RM ?= rm -rf
 
-SRCS := main.c init.c utils.c time.c write.c core.c nukem.c monitor.c
+SRCS := main.c init.c utils.c time.c write.c core.c nukem.c monitor.c actions.c
 BONUS_SRCS :=
 
 SRC_DIR := ./src

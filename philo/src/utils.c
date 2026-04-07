@@ -61,3 +61,24 @@ int	ft_atoi(const char *nptr)
 	}
 	return (num * neg);
 }
+
+int	is_dead(t_data *data, t_each *each)
+{
+	int	ret;
+
+	ret = 0;
+	pthread_mutex_lock(&each->state);
+	pthread_mutex_lock(&data->dead);
+	if (data->program_die || each->dead)
+		ret = 1;
+	pthread_mutex_unlock(&data->dead);
+	pthread_mutex_unlock(&each->state);
+	return (ret);
+}
+
+void	set_dead(t_data *data)
+{
+	pthread_mutex_lock(&data->dead);
+	data->program_die = 1;
+	pthread_mutex_unlock(&data->dead);
+}
