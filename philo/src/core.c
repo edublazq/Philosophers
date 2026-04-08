@@ -14,19 +14,26 @@
 
 void	r_philo(t_data *data, t_each *philo, int id)
 {
-	while (!is_dead(data, philo))
+	while (!is_dead(data, philo) && !philo->finished)
 	{
 		think(philo);
-		forks(data, philo, id);
-		if (is_dead(data, philo))
+		if (forks(data, philo, id))
 			break ;
+		if (is_dead(data, philo))
+		{
+			remove_forks(philo, id);
+			break ;
+		}
 		eat(philo);
-		remove_forks(data, philo, id);
+		remove_forks(philo, id);
 		if (is_dead(data, philo))
 			break ;
 		sleeping(philo);
 	}
+	if (philo->im_the_one)
+		died(philo);
 }
+
 void	*routine(void *args)
 {
 	t_each	*philo;
@@ -35,7 +42,7 @@ void	*routine(void *args)
 	philo = (t_each *)args;
 	data = philo->main_struct;
 	if (philo->id % 2 == 0)
-		ft_sleep(3, philo->main_struct, philo);
+		sleep_no_check(1);
 	r_philo(data, philo, philo->id);
 	return (NULL);
 }

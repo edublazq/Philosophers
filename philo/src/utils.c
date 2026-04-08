@@ -75,10 +75,3 @@ int	is_dead(t_data *data, t_each *each)
 	pthread_mutex_unlock(&each->state);
 	return (ret);
 }
-
-void	set_dead(t_data *data)
-{
-	pthread_mutex_lock(&data->dead);
-	data->program_die = 1;
-	pthread_mutex_unlock(&data->dead);
-}

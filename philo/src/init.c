@@ -57,6 +57,7 @@ int	parse(int ac, char **av, t_data *data)
 	}
 	else
 		data->n_times = -1;
+	data->time = get_time();
 	return (EXIT_SUCCESS);
 }
 
@@ -70,8 +71,9 @@ int	init_forks(t_data *data)
 	i = 0;
 	while (i < data->n_philos)
 	{
-		pthread_mutex_init(&data->forks[i++], NULL);
+		pthread_mutex_init(&data->forks[i], NULL);
 		pthread_mutex_init(&data->each[i].state, NULL);
+		i++;
 	}
 	pthread_mutex_init(&data->write, NULL);
 	pthread_mutex_init(&data->dead, NULL);
@@ -95,9 +97,12 @@ int	init_philos(t_data *data)
 		data->each[i].id = i + 1;
 		data->each[i].im_the_one = 0;
 		data->each[i].finished = 0;
+		data->each[i].last_meal = data->time;
 		data->each[i].left = &data->forks[i];
 		data->each[i].right = &data->forks[(i + 1) % data->n_philos];
 		i++;
 	}
+	if (init_forks(data))
+		return (free(data->each), free(data->forks), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

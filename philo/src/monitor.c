@@ -40,7 +40,7 @@ void	*r_monitor(void *args)
 	while (data->program_die == 0)
 	{
 		monitorize(data, data->n_philos);
-		ft_sleep(1);
+		sleep_no_check(1);
 	}
 	return (NULL);
 }

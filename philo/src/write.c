@@ -35,6 +35,7 @@ void	eat(t_each *philo)
 	pthread_mutex_lock(philo->write);
 	printf("%ld %d is eating\n", delta_time(philo->main_struct->time), philo->id);
 	pthread_mutex_unlock(philo->write);
+	ft_sleep(philo->main_struct->time_to_eat, philo->main_struct, philo);
 }
 
 void	sleeping(t_each *philo)
@@ -42,6 +43,7 @@ void	sleeping(t_each *philo)
 	pthread_mutex_lock(philo->write);
 	printf("%ld %d is sleeping\n", delta_time(philo->main_struct->time), philo->id);
 	pthread_mutex_unlock(philo->write);
+	ft_sleep(philo->main_struct->time_to_sleep, philo->main_struct, philo);
 }
 
 void	died(t_each *philo)

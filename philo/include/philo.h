@@ -58,6 +58,7 @@ typedef struct s_data
 
 long	delta_time(long old);
 long	get_time(void);
+void	sleep_no_check(long ms);
 void	ft_sleep(long ms, t_data *data, t_each *each);
 
 /* utils */
@@ -67,6 +68,7 @@ int		ft_isdigit(int c);
 int		ft_atoi(const char *nptr);
 int		is_dead(t_data *data, t_each *each);
 void	set_dead(t_data *data);
+int		mid_fork_dead(pthread_mutex_t *fork);
 
 /* init */
 
@@ -74,10 +76,9 @@ int		parse(int ac, char **av, t_data *data);
 int		init_forks(t_data *data);
 int		init_philos(t_data *data);
 
-/* write */
-void	dead_process(t_data *data, t_each *each, int id);
+/* write and actions */
 int		forks(t_data *data, t_each *each, int id);
-int		remove_forks(t_data *data, t_each *each, int id);
+void	remove_forks(t_each *each, int id);
 void	take_fork(pthread_mutex_t *fork, pthread_mutex_t *write,
 			int id, long time);
 void	eat(t_each *philo);

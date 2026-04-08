@@ -8,7 +8,8 @@ CPPFLAGS := -Iinclude -Wall -Wextra -Werror -g3
 
 RM ?= rm -rf
 
-SRCS := main.c init.c utils.c time.c write.c core.c nukem.c monitor.c actions.c
+SRCS := main.c init.c utils.c time.c write.c \
+		core.c nukem.c monitor.c actions.c utils2.c
 BONUS_SRCS :=
 
 SRC_DIR := ./src

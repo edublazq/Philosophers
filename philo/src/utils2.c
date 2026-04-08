@@ -12,4 +12,15 @@
 
 #include "philo.h"
 
+void	set_dead(t_data *data)
+{
+	pthread_mutex_lock(&data->dead);
+	data->program_die = 1;
+	pthread_mutex_unlock(&data->dead);
+}
 
+int	mid_fork_dead(pthread_mutex_t *fork)
+{
+	pthread_mutex_unlock(fork);
+	return (1);
+}
