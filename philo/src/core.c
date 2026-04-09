@@ -30,8 +30,10 @@ void	r_philo(t_data *data, t_each *philo, int id)
 			break ;
 		sleeping(philo);
 	}
+	pthread_mutex_lock(&philo->state);
 	if (philo->im_the_one)
 		died(philo);
+	pthread_mutex_unlock(&philo->state);
 }
 
 void	*routine(void *args)

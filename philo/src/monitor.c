@@ -22,11 +22,15 @@ void	monitorize(t_data *data, int n_philos)
 	time = get_time();
 	while (i < n_philos)
 	{
+		pthread_mutex_lock(&data->each[i].state);
 		last_meal = data->each[i].last_meal;
+		pthread_mutex_unlock(&data->each[i].state);
 		if (time - last_meal >= data->time_to_die)
 		{
-			data->program_die = 1;
+			set_dead(data);
+			pthread_mutex_lock(&data->each[i].state);
 			data->each[i].im_the_one = 1;
+			pthread_mutex_unlock(&data->each[i].state);
 		}
 		i++;
 	}

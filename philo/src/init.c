@@ -88,6 +88,8 @@ int	init_philos(t_data *data)
 	data->each = malloc(sizeof(t_each) * data->n_philos);
 	if (!data->each)
 		return (free(data->forks), EXIT_FAILURE);
+	if (init_forks(data))
+		return (free(data->each), free(data->forks), EXIT_FAILURE);
 	while (i < (size_t)data->n_philos)
 	{
 		data->each[i].write = &data->write;
@@ -102,7 +104,5 @@ int	init_philos(t_data *data)
 		data->each[i].right = &data->forks[(i + 1) % data->n_philos];
 		i++;
 	}
-	if (init_forks(data))
-		return (free(data->each), free(data->forks), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
