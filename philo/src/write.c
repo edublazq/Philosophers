@@ -13,35 +13,46 @@
 #include "philo.h"
 
 void	take_fork(pthread_mutex_t *fork, pthread_mutex_t *write,
-		int id, long time)
+		t_each *each)
 {
+	long	time;
+
+	time = each->main_struct->time;
 	pthread_mutex_lock(fork);
 	pthread_mutex_lock(write);
-	printf("%ld %d has taken a fork\n", delta_time(time), id);
+	if (!is_dead(each->main_struct))
+		printf("%ld %d has taken a fork\n", delta_time(time), each->id);
 	pthread_mutex_unlock(write);
 }
 
 void	eat(t_each *philo)
 {
-	int	n_times;
+	int		n_times;
+	t_data	*data;
 
+	data = philo->main_struct;
 	n_times = philo->main_struct->n_times;
 	pthread_mutex_lock(&philo->state);
 	philo->n_foods++;
 	philo->last_meal = get_time();
 	pthread_mutex_unlock(&philo->state);
 	pthread_mutex_lock(philo->write);
-	printf("%ld %d is eating\n", delta_time(philo->main_struct->time), philo->id);
+	if (!is_dead(data))
+		printf("%ld %d is eating\n", delta_time(data->time), philo->id);
 	pthread_mutex_unlock(philo->write);
-	ft_sleep(philo->main_struct->time_to_eat, philo->main_struct);
+	ft_sleep(data->time_to_eat, data);
 }
 
 void	sleeping(t_each *philo)
 {
+	t_data	*data;
+
+	data = philo->main_struct;
 	pthread_mutex_lock(philo->write);
-	printf("%ld %d is sleeping\n", delta_time(philo->main_struct->time), philo->id);
+	if (!is_dead(data))
+		printf("%ld %d is sleeping\n", delta_time(data->time), philo->id);
 	pthread_mutex_unlock(philo->write);
-	ft_sleep(philo->main_struct->time_to_sleep, philo->main_struct);
+	ft_sleep(data->time_to_sleep, data);
 }
 
 void	died(t_each *philo)
@@ -53,7 +64,11 @@ void	died(t_each *philo)
 
 void	think(t_each *philo)
 {
+	t_data	*data;
+
+	data = philo->main_struct;
 	pthread_mutex_lock(philo->write);
-	printf("%ld %d is thinking\n", delta_time(philo->main_struct->time), philo->id);
+	if (!is_dead(data))
+		printf("%ld %d is thinking\n", delta_time(data->time), philo->id);
 	pthread_mutex_unlock(philo->write);
 }

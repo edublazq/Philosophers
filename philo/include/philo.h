@@ -79,7 +79,7 @@ int		init_philos(t_data *data);
 int		forks(t_data *data, t_each *each, int id);
 void	remove_forks(t_each *each, int id);
 void	take_fork(pthread_mutex_t *fork, pthread_mutex_t *write,
-			int id, long time);
+			t_each *each);
 void	eat(t_each *philo);
 void	sleeping(t_each *philo);
 void	think(t_each *philo);

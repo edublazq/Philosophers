@@ -55,31 +55,6 @@ void	*routine(void *args)
 	return (NULL);
 }
 
-static void	wait_monitor(t_data *data)
-{
-	t_each	*each;
-	int		i;
-
-	each = data->each;
-	i = 0;
-	while (i < data->n_philos)
-	{
-		pthread_mutex_lock(&each[i].state);
-		if (each[i].last_meal != data->time)
-		{
-			pthread_mutex_unlock(&each[i].state);
-			i++;
-		}
-		else
-		{
-			pthread_mutex_unlock(&each[i].state);
-			sleep_no_check(1);
-			i = 0;
-		}
-	}
-	sleep_no_check(1);
-}
-
 int	philosophers(t_data *data)
 {
 	t_each	*each;
@@ -92,7 +67,6 @@ int	philosophers(t_data *data)
 		pthread_create(&each[i].thread, NULL, routine, &each[i]);
 		i++;
 	}
-	wait_monitor(data);
 	pthread_create(&data->monitor, NULL, r_monitor, data);
 	i = 0;
 	while (i < data->n_philos)
