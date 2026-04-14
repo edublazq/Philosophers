@@ -17,6 +17,7 @@ static void	destroy_mutex(t_data *data)
 	int	i;
 
 	pthread_mutex_destroy(&data->write);
+	pthread_mutex_destroy(&data->dead);
 	i = 0;
 	while (i < data->n_philos)
 		pthread_mutex_destroy(&data->forks[i++]);

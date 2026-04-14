@@ -37,14 +37,14 @@ void	sleep_no_check(long ms)
 		usleep(500);
 }
 
-void	ft_sleep(long ms, t_data *data, t_each *each)
+void	ft_sleep(long ms, t_data *data)
 {
 	long	start;
 
 	start = get_time();
 	while (get_time() - start < ms)
 	{
-		if (is_dead(data, each))
+		if (is_dead(data))
 			break ;
 		usleep(500);
 	}

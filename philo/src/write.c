@@ -28,14 +28,12 @@ void	eat(t_each *philo)
 	n_times = philo->main_struct->n_times;
 	pthread_mutex_lock(&philo->state);
 	philo->n_foods++;
-	if (n_times > 0 && philo->n_foods >= n_times)
-		philo->finished = 1;
 	philo->last_meal = get_time();
 	pthread_mutex_unlock(&philo->state);
 	pthread_mutex_lock(philo->write);
 	printf("%ld %d is eating\n", delta_time(philo->main_struct->time), philo->id);
 	pthread_mutex_unlock(philo->write);
-	ft_sleep(philo->main_struct->time_to_eat, philo->main_struct, philo);
+	ft_sleep(philo->main_struct->time_to_eat, philo->main_struct);
 }
 
 void	sleeping(t_each *philo)
@@ -43,7 +41,7 @@ void	sleeping(t_each *philo)
 	pthread_mutex_lock(philo->write);
 	printf("%ld %d is sleeping\n", delta_time(philo->main_struct->time), philo->id);
 	pthread_mutex_unlock(philo->write);
-	ft_sleep(philo->main_struct->time_to_sleep, philo->main_struct, philo);
+	ft_sleep(philo->main_struct->time_to_sleep, philo->main_struct);
 }
 
 void	died(t_each *philo)

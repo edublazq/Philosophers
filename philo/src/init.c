@@ -97,7 +97,6 @@ int	init_philos(t_data *data)
 		data->each[i].n_foods = 0;
 		data->each[i].dead = 0;
 		data->each[i].id = i + 1;
-		data->each[i].im_the_one = 0;
 		data->each[i].finished = 0;
 		data->each[i].last_meal = data->time;
 		data->each[i].left = &data->forks[i];

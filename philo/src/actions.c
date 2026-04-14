@@ -17,14 +17,14 @@ int	forks(t_data *data, t_each *each, int id)
 	if (id % 2 == 0)
 	{
 		take_fork(each->left, &data->write, id, data->time);
-		if (is_dead(data, each))
+		if (is_dead(data))
 			return (mid_fork_dead(each->left));
 		take_fork(each->right, &data->write, id, data->time);
 	}
 	else
 	{
 		take_fork(each->right, &data->write, id, data->time);
-		if (is_dead(data, each))
+		if (is_dead(data))
 			return (mid_fork_dead(each->right));
 		take_fork(each->left, &data->write, id, data->time);
 	}

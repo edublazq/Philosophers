@@ -14,26 +14,29 @@
 
 void	r_philo(t_data *data, t_each *philo, int id)
 {
-	while (!is_dead(data, philo) && !philo->finished)
+	while (1)
 	{
+		pthread_mutex_lock(&philo->state);
+		if (is_dead(data) || philo->finished)
+		{
+			pthread_mutex_unlock(&philo->state);
+			break ;
+		}
+		pthread_mutex_unlock(&philo->state);
 		think(philo);
 		if (forks(data, philo, id))
 			break ;
-		if (is_dead(data, philo))
+		if (is_dead(data))
 		{
 			remove_forks(philo, id);
 			break ;
 		}
 		eat(philo);
 		remove_forks(philo, id);
-		if (is_dead(data, philo))
+		if (is_dead(data))
 			break ;
 		sleeping(philo);
 	}
-	pthread_mutex_lock(&philo->state);
-	if (philo->im_the_one)
-		died(philo);
-	pthread_mutex_unlock(&philo->state);
 }
 
 void	*routine(void *args)
@@ -43,27 +46,56 @@ void	*routine(void *args)
 
 	philo = (t_each *)args;
 	data = philo->main_struct;
+	pthread_mutex_lock(&philo->state);
+	philo->last_meal = get_time();
+	pthread_mutex_unlock(&philo->state);
 	if (philo->id % 2 == 0)
 		sleep_no_check(1);
 	r_philo(data, philo, philo->id);
 	return (NULL);
 }
 
+static void	wait_monitor(t_data *data)
+{
+	t_each	*each;
+	int		i;
+
+	each = data->each;
+	i = 0;
+	while (i < data->n_philos)
+	{
+		pthread_mutex_lock(&each[i].state);
+		if (each[i].last_meal != data->time)
+		{
+			pthread_mutex_unlock(&each[i].state);
+			i++;
+		}
+		else
+		{
+			pthread_mutex_unlock(&each[i].state);
+			sleep_no_check(1);
+			i = 0;
+		}
+	}
+	sleep_no_check(1);
+}
+
 int	philosophers(t_data *data)
 {
 	t_each	*each;
-	size_t	i;
+	int		i;
 
 	i = 0;
 	each = data->each;
-	while (i < (size_t)data->n_philos)
+	while (i < data->n_philos)
 	{
 		pthread_create(&each[i].thread, NULL, routine, &each[i]);
 		i++;
 	}
+	wait_monitor(data);
 	pthread_create(&data->monitor, NULL, r_monitor, data);
 	i = 0;
-	while (i < (size_t)data->n_philos)
+	while (i < data->n_philos)
 	{
 		pthread_join(each[i].thread, NULL);
 		i++;

@@ -12,25 +12,52 @@
 
 #include "philo.h"
 
-void	monitorize(t_data *data, int n_philos)
+static void	check_finish(t_data *data)
 {
 	int		i;
-	long	time;
+	int		end;
+	t_each	*each;
+
+	each = data->each;
+	i = 0;
+	end = 1;
+	while (i < data->n_philos)
+	{
+		pthread_mutex_lock(&each[i].state);
+		if (each[i].n_foods >= data->n_times)
+			each[i].finished = 1;
+		else
+			end = 0;
+		pthread_mutex_unlock(&each[i].state);
+		i++;
+	}
+	if (end == 1)
+		set_dead(data);
+}
+
+static void	monitorize(t_data *data, int n_philos)
+{
+	int		i;
+	int		finished;
 	long	last_meal;
 
 	i = 0;
-	time = get_time();
 	while (i < n_philos)
 	{
 		pthread_mutex_lock(&data->each[i].state);
 		last_meal = data->each[i].last_meal;
+		finished = data->each[i].finished;
 		pthread_mutex_unlock(&data->each[i].state);
-		if (time - last_meal >= data->time_to_die)
+		if (finished)
+		{
+			i++;
+			continue ;
+		}
+		if (get_time() - last_meal >= data->time_to_die)
 		{
 			set_dead(data);
-			pthread_mutex_lock(&data->each[i].state);
-			data->each[i].im_the_one = 1;
-			pthread_mutex_unlock(&data->each[i].state);
+			died(&data->each[i]);
+			break ;
 		}
 		i++;
 	}
@@ -44,6 +71,8 @@ void	*r_monitor(void *args)
 	while (data->program_die == 0)
 	{
 		monitorize(data, data->n_philos);
+		if (data->n_times > 0)
+			check_finish(data);
 		sleep_no_check(1);
 	}
 	return (NULL);

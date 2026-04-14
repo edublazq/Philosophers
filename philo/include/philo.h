@@ -28,7 +28,6 @@ typedef struct s_each
 	pthread_t		thread;
 	int				id;
 	int				finished;
-	int				im_the_one;
 	int				n_foods;
 	int				dead;
 	long			last_meal;
@@ -59,14 +58,14 @@ typedef struct s_data
 long	delta_time(long old);
 long	get_time(void);
 void	sleep_no_check(long ms);
-void	ft_sleep(long ms, t_data *data, t_each *each);
+void	ft_sleep(long ms, t_data *data);
 
 /* utils */
 
 size_t	ft_strlen(const char *s);
 int		ft_isdigit(int c);
 int		ft_atoi(const char *nptr);
-int		is_dead(t_data *data, t_each *each);
+int		is_dead(t_data *data);
 void	set_dead(t_data *data);
 int		mid_fork_dead(pthread_mutex_t *fork);
 
