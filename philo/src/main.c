@@ -22,6 +22,11 @@ int	main(int ac, char **av)
 		printf("time_to_sleep [number_of_times_each_philosopher_must_eat]\n");
 		return (EXIT_FAILURE);
 	}
+	if (data.n_philos == 1)
+	{
+		one_philo(&data);
+		return (EXIT_SUCCESS);
+	}
 	if (init_philos(&data))
 		return (EXIT_FAILURE);
 	if (philosophers(&data))

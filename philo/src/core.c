@@ -12,6 +12,14 @@
 
 #include "philo.h"
 
+void	one_philo(t_data *data)
+{
+	printf("0 1 is thinking\n");
+	printf("0 1 has taken a fork\n");
+	sleep_no_check(data->time_to_die);
+	printf("%d 1 died\n", data->time_to_die);
+}
+
 void	r_philo(t_data *data, t_each *philo, int id)
 {
 	while (1)

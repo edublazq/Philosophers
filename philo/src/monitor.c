@@ -53,7 +53,7 @@ static void	monitorize(t_data *data, int n_philos)
 			i++;
 			continue ;
 		}
-		if (get_time() - last_meal >= data->time_to_die)
+		if (get_time() - last_meal > data->time_to_die)
 		{
 			set_dead(data);
 			died(&data->each[i]);

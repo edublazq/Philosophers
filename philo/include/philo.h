@@ -87,6 +87,7 @@ void	died(t_each *philo);
 
 /* core */
 
+void	one_philo(t_data *data);
 int		philosophers(t_data *data);
 void	*r_monitor(void *args);
 void	nukem(t_data *data);

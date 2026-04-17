@@ -3,8 +3,8 @@ NAME_BONUS := philo_bonus
 
 CC := cc
 
-CFLAGS ?= -Wall -Wextra -Werror -g3 -fsanitize=thread
-CPPFLAGS := -Iinclude -Wall -Wextra -Werror -g3 -fsanitize=thread
+CFLAGS ?= -Wall -Wextra -Werror
+CPPFLAGS := -Iinclude -Wall -Wextra -Werror
 
 RM ?= rm -rf
 

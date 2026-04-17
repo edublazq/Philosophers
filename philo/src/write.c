@@ -27,11 +27,9 @@ void	take_fork(pthread_mutex_t *fork, pthread_mutex_t *write,
 
 void	eat(t_each *philo)
 {
-	int		n_times;
 	t_data	*data;
 
 	data = philo->main_struct;
-	n_times = philo->main_struct->n_times;
 	pthread_mutex_lock(&philo->state);
 	philo->n_foods++;
 	philo->last_meal = get_time();
