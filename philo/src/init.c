@@ -25,10 +25,14 @@ static int	check_input(int ac, char **av)
 		j = 0;
 		if (!av[i])
 			return (EXIT_FAILURE);
+		if(av[i][j] == '+')
+			j++;
 		while (j < ft_strlen(av[i]))
 		{
 			if (!ft_isdigit(av[i][j]))
+			{
 				return (EXIT_FAILURE);
+			}
 			j++;
 		}
 		i++;
